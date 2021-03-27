@@ -1,0 +1,370 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "URI": "product-schema-base#",
+  "type": "object",
+  "title": "The product base schema dc-waterfall",
+  "required": [
+    "apiKey",
+    "id",
+    "name",
+    "url",
+    "status",
+    "price",
+    "images",
+    "categories"
+  ],
+  "properties": {
+    "apiKey": {
+      "URI": "#/properties/apiKey",
+      "type": "string",
+      "title": "Client ApiKey"
+    },
+    "id": {
+      "URI": "#/properties/id",
+      "type": "string",
+      "title": "Product ID"
+    },
+    "name": {
+      "URI": "#/properties/name",
+      "type": "string",
+      "title": "Product name"
+    },
+    "url": {
+      "URI": "#/properties/url",
+      "type": "string",
+      "title": "Product URL"
+    },
+    "status": {
+      "URI": "#/properties/status",
+      "type": "string",
+      "title": "Product Status",
+      "enum": [
+        "AVAILABLE",
+        "UNAVAILABLE",
+        "REMOVED",
+        "available",
+        "unavailable",
+        "removed"
+      ]
+    },
+    "price": {
+      "URI": "#/properties/price",
+      "type": "number",
+      "title": "Product price",
+      "minimum": 0
+    },
+    "oldPrice": {
+      "type": "object",
+      "$ref": "#/properties/price"
+    },
+    "basePrice": {
+      "type": "object",
+      "$ref": "#/properties/price"
+    },
+    "images": {
+      "URI": "#/properties/images",
+      "type": "object",
+      "title": "Product image path",
+      "required": [
+        "default"
+      ],
+      "properties": {
+        "default": {
+          "URI": "#/properties/images/properties/default",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "imagesSsl": {
+      "type": "object",
+      "$ref": "#/properties/images"
+    },
+    "categories": {
+      "URI": "#/properties/categories",
+      "type": "array",
+      "title": "The categories schema",
+      "additionalItems": true,
+      "items": {
+        "URI": "#/properties/categories/items",
+        "type": "object",
+        "title": "Category Array",
+        "required": [
+          "id",
+          "name",
+          "parents"
+        ],
+        "properties": {
+          "id": {
+            "URI": "#/properties/categories/items/properties/id",
+            "type": "string",
+            "title": "Category ID"
+          },
+          "name": {
+            "URI": "#/properties/categories/items/properties/name",
+            "type": "string",
+            "title": "Category Name"
+          },
+          "parents": {
+            "URI": "#/properties/categories/items/properties/parents",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Category parents"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "description": {
+      "URI": "#/properties/description",
+      "type": "string",
+      "title": "Product description"
+    },
+    "salesChannel": {
+      "URI": "#/properties/salesChannel",
+      "type": "string",
+      "title": "Product salesChannel"
+    },
+    "details": {
+      "URI": "#/properties/details",
+      "type": "object",
+      "title": "Details of product"
+    },
+    "installment": {
+      "URI": "#/properties/installment",
+      "type": "object",
+      "title": "The installment base schema",
+      "required": [
+        "count",
+        "price"
+      ],
+      "properties": {
+        "count": {
+          "URI": "#/properties/installment/properties/count",
+          "type": "integer",
+          "minimum": 0
+        },
+        "price": {
+          "type": "object",
+          "$ref": "#/properties/price"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "URI": "#/properties/tags",
+      "title": "The tags schema",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "published": {
+      "URI": "#/properties/published",
+      "type": "string",
+      "format": "date",
+      "title": "Product published"
+    },
+    "unit": {
+      "URI": "#/properties/unit",
+      "type": "string",
+      "title": "Product unit"
+    },
+    "stock": {
+      "URI": "#/properties/stock",
+      "type": "integer",
+      "title": "Product stock",
+      "minimum": 0
+    },
+    "isThirdParty": {
+      "$id": "#/properties/isThirdParty",
+      "type": "boolean",
+      "title": "Product isThirdParty",
+      "examples": [
+        "true"
+      ]
+    },
+    "eanCode": {
+      "URI": "#/properties/eanCode",
+      "type": "string",
+      "title": "Product eanCode"
+    },
+    "specs": {
+      "URI": "#/properties/specs",
+      "type": "object",
+      "title": "The specs schema",
+      "patternProperties": {
+        "^.*$": {
+          "allOf": [
+            {
+              "type": "array",
+              "items": {
+                "URI": "#/properties/specs/items",
+                "type": "object",
+                "title": "Spec Array",
+                "required": [
+                  "id",
+                  "label"
+                ],
+                "properties": {
+                  "id": {
+                    "URI": "#/properties/specs/items/properties/id",
+                    "type": "string"
+                  },
+                  "label": {
+                    "URI": "#/properties/specs/items/properties/label",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "skus": {
+      "URI": "#/properties/skus",
+      "type": "array",
+      "title": "The skus schema",
+      "items": {
+        "URI": "#/properties/skus/items",
+        "type": "object",
+        "required": [
+          "sku",
+          "specs"
+        ],
+        "properties": {
+          "sku": {
+            "URI": "#/properties/skus/items/properties/sku",
+            "type": "string"
+          },
+          "specs": {
+            "type": "object",
+            "patternProperties": {
+              "^.*$": {
+                "URI": "#/properties/skus/items/properties/specs",
+                "type": "string",
+                "title": "Specs"
+              }
+            }
+          },
+          "properties": {
+            "URI": "#/properties/skus/items/properties/properties",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "$ref": "#/properties/name"
+              },
+              "status": {
+                "type": "object",
+                "$ref": "#/properties/status"
+              },
+              "description": {
+                "type": "object",
+                "$ref": "#/properties/description"
+              },
+              "url": {
+                "type": "object",
+                "$ref": "#/properties/url"
+              },
+              "images": {
+                "type": "object",
+                "$ref": "#/properties/images"
+              },
+              "imagesSsl": {
+                "type": "object",
+                "$ref": "#/properties/images"
+              },
+              "price": {
+                "type": "object",
+                "$ref": "#/properties/price"
+              },
+              "installment": {
+                "type": "object",
+                "$ref": "#/properties/installment"
+              },
+              "oldPrice": {
+                "type": "object",
+                "$ref": "#/properties/price"
+              },
+              "basePrice": {
+                "type": "object",
+                "$ref": "#/properties/price"
+              },
+              "stock": {
+                "type": "object",
+                "$ref": "#/properties/stock"
+              },
+              "details": {
+                "type": "object",
+                "$ref": "#/properties/details"
+              },
+              "tags": {
+                "type": "object",
+                "$ref": "#/properties/tags"
+              },
+              "organicDetails": {
+                "URI": "#/properties/properties//organicDetails",
+                "type": "object",
+                "title": "Organic details of product"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "attributes": {
+      "URI": "#/properties/attributes",
+      "type": "array",
+      "title": "The attributes schema",
+      "items": {
+        "URI": "#/properties/attributes/items",
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "URI": "#/properties/skus/items/properties/nameId",
+            "type": "string"
+          },
+          "name": {
+            "URI": "#/properties/skus/items/properties/name",
+            "type": "string"
+          },
+          "valueId": {
+            "URI": "#/properties/skus/items/properties/valueId",
+            "type": "string"
+          },
+          "value": {
+            "URI": "#/properties/skus/items/properties/value",
+            "type": "string"
+          },
+          "categoryHierarchy": {
+            "URI": "#/properties/skus/items/properties/categoryHierarchy",
+            "type": "string"
+          },
+          "categoryId": {
+            "URI": "#/properties/skus/items/properties/categoryId",
+            "type": "string"
+          },
+          "values": {
+            "URI": "#/properties/values",
+            "type": "array",
+            "title": "The values schema",
+            "items": {
+              "URI": "#/properties/values/items",
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
